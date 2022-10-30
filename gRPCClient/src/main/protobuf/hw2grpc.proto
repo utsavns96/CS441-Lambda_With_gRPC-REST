@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package com.example.protos;
+
+service logfind {
+  rpc LogFinder (Request) returns (Reply) {}
+}
+
+message Request {
+  string T = 1;
+  string dT = 2;
+}
+
+message Reply {
+  string message = 1;
+}
