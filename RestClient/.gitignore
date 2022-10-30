@@ -5,12 +5,6 @@ project/
 target/
 build/
 out/
-RestClient/bin/
-RestClient/project/
-RestClient/target/
-RestClient/build/
-RestClient/out/
-
 
 *.log
 *.iml
