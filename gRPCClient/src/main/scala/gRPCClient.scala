@@ -7,7 +7,6 @@ import com.example.protos.hw2grpc.logfindGrpc.logfindBlockingStub
 import io.grpc.{ManagedChannel, ManagedChannelBuilder, StatusRuntimeException}
 
 //This program creates our gRPC Client and sends requests to our gRPC Server
-//setting up our logger globally so that we can use it in the whole program
 
 
 object gRPCClient {
