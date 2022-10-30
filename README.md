@@ -52,8 +52,8 @@ To automate the process of running this program and copying the file, there is a
 
 To create the EC2 instance for our specific needs, we have to follow the below steps:
 1) Launch EC2 instance with Ubuntu that is at least a t2.medium (I have tried t2.micro, and gave up on waiting for it to finish compiling after over an hour).
-2) Choose <your key name> as the key.
-3) Convert <your key name>.ppk to .pem using puttyGen.
+2) Choose `<your key name>` as the key.
+3) Convert `<your key name>.ppk` to `.pem` using puttyGen.
 4) Connect to the EC2 instance using ```ssh -i <the filepath to your .pem> ubuntu@<your EC2 instance>```  and install scala, java, sbt and the AWS CLI:
 ```
 	sudo apt-get update
