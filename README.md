@@ -29,11 +29,10 @@ Video link:
 4) Deploy the LogFileGenerator on an EC2 instance and store the log file in an S3 bucket.
 
 Other Requirements:
-1) The output files should be in the format of .csv.
-2) 5 or more scalatests should be implemented.
-3) Logging used for all programs.
-4) Configurable control variables (Time intervals, Time, etc).
-5) Compileable through sbt.
+1) 5 or more scalatests should be implemented.
+2) Logging used for all programs.
+3) Configurable control variables (Time intervals, Time, etc).
+4) Compileable through sbt.
 
 ## Technical Design
 
