@@ -1,16 +1,17 @@
 syntax = "proto3";
 
 package com.example.protos;
-
+//We have one lambda function to process our request.
+//We send a single request and get a single response
 service logfind {
   rpc LogFinder (Request) returns (Reply) {}
 }
-
+//We send 2 parameters
 message Request {
   string T = 1;
   string dT = 2;
 }
-
+//We receive one string as the response
 message Reply {
   string message = 1;
 }
