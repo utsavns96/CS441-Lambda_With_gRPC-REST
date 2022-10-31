@@ -7,7 +7,7 @@ Repo for the REST and gRPC homework-2 for CS411-Fall2022
 
 ---
 
-Video link: 
+Video link: https://youtu.be/3wvKWLq0N0w
 
 ---
 ## Running the project
@@ -17,8 +17,8 @@ Video link:
 4) To compile gRPCClient, navigate to its directory and run `sbt clean compile`
 5) To compile LogFileGenerator, navigate to its directory and run `sbt clean compile`
 6) To run the REST Client, navigate to the RestClient directory and launch a terminal. From the terminal, run `sbt run`.
-7) To run the gRPC Implementation locally, navigate to the project directory and launch a terminal. From the terminal, run `sbt run`. Once this is running, navigate to `\src\main\resources` in the gRPCClient directory first and change `RemoteServer` to **0** in `application.conf`, after which you can launch a terminal in the root of the project the gRPCClient directory and launch a terminal, in which you run `sbt run`.
-8) To run the gRPC Implementation using an EC2 instance, ssh to your EC2 instance and navigate to the gRPCServer directory, where you run `sbt run`. Once this is running, navigate to `\src\main\resources` in the gRPCClient directory on your local machine first and change `RemoteServer` to **1** and `RemoteURL` to the IP address of the EC2 instance  in `application.conf`, after which you can launch a terminal in the root of the project the gRPCClient directory in which you run `sbt run`.
+7) To run the gRPCServer locally, navigate to the project directory and launch a terminal. From the terminal, run `sbt run`. Once this is running, navigate to `\src\main\resources` in the gRPCClient directory first and change `RemoteServer` to **0** in `application.conf`, after which you can launch a terminal in the root of the project the gRPCClient directory and launch a terminal, in which you run `sbt run`.
+8) To run the gRPCServer using an EC2 instance, ssh to your EC2 instance and navigate to the gRPCServer directory, where you run `sbt run`. Once this is running, navigate to `\src\main\resources` in the gRPCClient directory on your local machine first and change `RemoteServer` to **1** and `RemoteURL` to the IP address of the EC2 instance  in `application.conf`, after which you can launch a terminal in the root of the project the gRPCClient directory in which you run `sbt run`. (You will need to scp the project in the manner described later in this document)
 9) To run LogFileGenerator, navigate to its directory and run `sbt run`
 10) To test, run `sbt test` through the terminal in the RestClient directory.
 ---
@@ -29,11 +29,10 @@ Video link:
 4) Deploy the LogFileGenerator on an EC2 instance and store the log file in an S3 bucket.
 
 Other Requirements:
-1) The output files should be in the format of .csv.
-2) 5 or more scalatests should be implemented.
-3) Logging used for all programs.
-4) Configurable control variables (Time intervals, Time, etc).
-5) Compileable through sbt.
+1) 5 or more scalatests should be implemented.
+2) Logging used for all programs.
+3) Configurable control variables (Time intervals, Time, etc).
+4) Compileable through sbt.
 
 ## Technical Design
 
@@ -53,8 +52,8 @@ To automate the process of running this program and copying the file, there is a
 
 To create the EC2 instance for our specific needs, we have to follow the below steps:
 1) Launch EC2 instance with Ubuntu that is at least a t2.medium (I have tried t2.micro, and gave up on waiting for it to finish compiling after over an hour).
-2) Choose <your key name> as the key.
-3) Convert <your key name>.ppk to .pem using puttyGen.
+2) Choose `<your key name>` as the key.
+3) Convert `<your key name>.ppk` to `.pem` using puttyGen.
 4) Connect to the EC2 instance using ```ssh -i <the filepath to your .pem> ubuntu@<your EC2 instance>```  and install scala, java, sbt and the AWS CLI:
 ```
 	sudo apt-get update
