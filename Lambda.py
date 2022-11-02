@@ -11,13 +11,14 @@ def lambda_handler(event, context):
     resultlist = list()
     pattern=re.compile(os.environ['pattern'])
     s3 = boto3.client('s3')
+    #Checking if the query has input as query string parameters or json
     if event['queryStringParameters']:
         t = event['queryStringParameters']['T']
         dt = event['queryStringParameters']['dT']
     else:
         t = json.loads(event['body'])['T']
         dt = json.loads(event['body'])['dT']
-        
+    #function for binary search
     def binarysearch(low,mid,high,timetocheck,logfile):
         print('In binary search')
         while low<=high:
@@ -31,7 +32,7 @@ def lambda_handler(event, context):
                 print('Breaking out of while')
                 break
         return mid
-
+    #function to get the MD5 hash for log strings
     def md5resp():
         print('in md5resp')
         logfile = list()
@@ -55,25 +56,27 @@ def lambda_handler(event, context):
         print(resultlist)
         return resultlist
  
-
+    #get the first few bytes of the file
     head = s3.get_object(Bucket=os.environ['s3bucket'],Key=os.environ['filepath'],Range=os.environ['headrange']).get('Body').read().decode('utf-8')
     head = "".join(head).split("\r")[0].replace("\n", "")
+    #getting the last few bytes of the file
     tail = s3.get_object(Bucket=os.environ['s3bucket'],Key=os.environ['filepath'],Range=os.environ['tailrange']).get('Body').read().decode('utf-8')
     tail = "".join(tail).split("\r")[-2].replace("\n", "")
-
+    #get the first and last timestamp of the log file
     firstlog = datetime.time(int(head[0:2]),int(head[3:5]))
     lastlog = datetime.time(int(tail[0:2]),int(tail[3:5]))
     
-
+    #convert the input to time
     inputtime=datetime.time(int(t[0:2]), int(t[3:5]))
     timechange = datetime.timedelta(hours=int(dt[0:2]),minutes=int(dt[3:5]))
-    
+    #using datetime to allow us to add and subtract time, and then compare it
     low = (datetime.datetime.combine(datetime.date(1,1,1),inputtime) - timechange).time()
     high = (datetime.datetime.combine(datetime.date(1,1,1),inputtime) + timechange).time()
     print('firstlog=',firstlog)
     print('lastlog=',lastlog)
     print('low=',low)
     print('high=',high)
+    #if the time window in input lies in the start and end of the log file
     if(firstlog <= low and lastlog >= high):
             print('trying to get md5 hash')
             result=md5resp()
